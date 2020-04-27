@@ -12,3 +12,5 @@ An encryption daemon used to convert a message into a unique cipher which can be
 * To decipher open command prompt once again 
 * Type `python getCipherMessageBeta.py` and hit `Enter`
 * You will get your original message 
+
+[![GitHub release](https://img.shields.io/github/release/Naereen/StrapDown.js.svg)](https://GitHub.com/Naereen/StrapDown.js/releases/)
