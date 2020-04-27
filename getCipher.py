@@ -34,7 +34,7 @@ def embedCipher(cipherVector, messageVector):
 		index += 1
 	return cipherMessageVector
 
-def makeCipherVector(messageVector):
+def makeCipherVector(messageVector, timeStampVector):
 	cipherVector, cipherMessageVector = [], []
 	while(True):
 		num = random.randint(10000, 9999999)
@@ -44,7 +44,15 @@ def makeCipherVector(messageVector):
 				cipherVector.append(numStr)
 		if(len(cipherVector) == 89):
 			break
-	cipherMessageVector = embedCipher(cipherVector, messageVector)
+	while(len(messageVector) != 0):
+		if(len(messageVector)>89):
+			messageVectorDelta = messageVector[0:89]
+			messageVector = messageVector[89:len(messageVector)]
+		else:
+			messageVectorDelta = messageVector 
+			messageVector = []
+		cipherMessageVector += embedCipher(cipherVector, messageVectorDelta)
+	cipherMessageVector += embedCipher(cipherVector, timeStampVector)
 	return (cipherVector, cipherMessageVector)
 
 def joinCipherVector(cipherVector):
@@ -67,10 +75,10 @@ def getCipherMessage(joinedCipher):
 		
 message = input('Enter your message: ')
 timestamp = mgd.getTimeStamp()
-message = message + ' @ '+timestamp
 messageVector = [element for element in message]
+timeStampVector = [element for element in timestamp]
 print('Message laid!')
-cipherVector, cipherMessageVector = makeCipherVector(messageVector)
+cipherVector, cipherMessageVector = makeCipherVector(messageVector, timeStampVector)
 finalCipherVector = cipherVector + cipherMessageVector
 joinedCipher = joinCipherVector(finalCipherVector)
 finalCipher = getCipherMessage(joinedCipher)

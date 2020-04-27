@@ -24,15 +24,16 @@ def getNumerical(fileCipher):
 
 def getMessageFromCipher(fileCipher):
 	fileCipher = getNumerical(fileCipher)
-	elemLen, index = 7, 0
+	elemLen, index, maxLen = 7, 0, 89
 	element = ''
 	cipherVector = []
 	while(fileCipher != ''):
 		element = fileCipher[index:elemLen]
 		cipherVector.append(int(element))
 		fileCipher = fileCipher[elemLen:len(fileCipher)]
-	cipherRawVector = cipherVector[index:int(len(cipherVector)/2)]
-	cipherMessagevector = cipherVector[int(len(cipherVector)/2):len(cipherVector)]
+	cipherVector = cipherVector[:len(cipherVector)-maxLen]
+	cipherRawVector = cipherVector[index:maxLen]
+	cipherMessagevector = cipherVector[maxLen:len(cipherVector)]
 	differenceVector = vectorDifference(cipherMessagevector, cipherRawVector)
 	return "".join(differenceVector)
 
@@ -42,5 +43,4 @@ fileCipher = file.read()
 file.close()
 
 message = getMessageFromCipher(fileCipher)
-message = message[:message.index('@')-1]
 print(message)
