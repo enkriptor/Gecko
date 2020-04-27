@@ -13,4 +13,4 @@ An encryption daemon used to convert a message into a unique cipher which can be
 * Type `python getCipherMessageBeta.py` and hit `Enter`
 * You will get your original message 
 
-[![GitHub release](https://img.shields.io/github/release/Naereen/StrapDown.js.svg)](https://GitHub.com/Naereen/StrapDown.js/releases/)
+[![Generic badge](https://img.shields.io/badge/Release-v1.0.0-#0000FF.svg)](https://shields.io/)
