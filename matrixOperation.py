@@ -1,16 +1,5 @@
 import random
 
-def squareMatrixMakerOnLength(length):
-	infinity = 99999999999999999999
-	squareMatrix = []
-	rowVector = []
-	while(len(squareMatrix)!=length):
-		for index in range(0, length):
-			rowVector.append(random.randint(0, infinity))
-		squareMatrix.append(rowVector)
-		rowVector = []
-	return squareMatrix
-
 def squareMatrixMakerOnList(listInput):
 	squareMatrix = []
 	rowVector = []
@@ -24,13 +13,6 @@ def squareMatrixMakerOnList(listInput):
 		rowVector = []
 	return squareMatrix
 
-def displayMatrix(matrix):
-	for element in matrix:
-		getRow = ''
-		for subElement in element:
-			getRow += str(subElement) + ' '
-		print(getRow)
-
 def makeDefaultSquareMatrix(length):
 	defaultMatrix = []
 	rowVector = []
@@ -41,15 +23,6 @@ def makeDefaultSquareMatrix(length):
 		rowVector = []
 	return defaultMatrix
 
-def addMatrices(matrixVector):
-	matrixSum = makeDefaultSquareMatrix(len(matrixVector[0]))
-	count = 0
-	while(count != len(matrixVector)):
-		for index in range(0,len(matrixSum)):
-			for subIndex in range(0,len(matrixSum)):
-				matrixSum[index][subIndex] += matrixVector[count][index][subIndex]
-		count += 1
-	return matrixSum
 
 def matrixTransposer(matrix):
 	transposeMatrix = makeDefaultSquareMatrix(len(matrix))
