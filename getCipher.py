@@ -1,6 +1,6 @@
 import time
 import random
-import msgGetDemo as mgd
+import timeStampGenerator as tsg
 import matrixOperation as mop
 
 def checkLength(num):
@@ -67,7 +67,7 @@ def getCipherMessage(joinedCipher):
 	return "".join(cipherList)
 		
 message = input('Enter your message: ')
-timestamp = mgd.getTimeStamp()
+timestamp = tsg.getTimeStamp()
 messageVector = [element for element in message]
 timeStampVector = [element for element in timestamp]
 print('Message laid!')
