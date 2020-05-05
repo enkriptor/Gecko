@@ -13,4 +13,9 @@ An encryption daemon used to convert a message into a unique cipher which can be
 * Type `python getCipherMessageBeta.py` and hit `Enter`
 * You will get your original message 
 
-[![Generic badge](https://img.shields.io/badge/Release-v1.0.0-<COLOR>.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Release-v1.1.0-<COLOR>.svg)](https://shields.io/)
+
+# What's new feature in v1.1.0?
+* Matrix operation for handling the cipher and decipher workflows
+* Message input length now extended but limited to `300` per use for ciphering and deciphering workflows
+* Code cleaning methodologies in use. `Will produce better code for readability!`
