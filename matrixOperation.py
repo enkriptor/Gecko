@@ -64,17 +64,3 @@ def matrixToVector(matrix):
 		for index in rowVector:
 			finalVector.append(index)
 	return finalVector
-	
-# # def getMatrixCalc():
-# matrixA = squareMatrixMakerOnList([1,4,7,2,5,8,3,6,9])
-# # matrixA = squareMatrixMakerOnLength(3)
-# matrixATranspose = matrixTransposer(matrixA)
-# print(matrixToVector(matrixATranspose))
-# # 	# matrixB = squareMatrixMaker(3)
-# # 	# matrixO = makeDefaultMatrix(3)
-
-# # 	displayMatrix(matrixA)
-# displayMatrix(matrixATranspose)
-# # 	# displayMatrix(matrixB)
-
-# getMatrixCalc()
