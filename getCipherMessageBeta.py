@@ -1,9 +1,13 @@
+import matrixOperation as mop
+
 def vectorDifference(cipherMessagevector, cipherRawVector):
 	index = 0
 	differenceVector = []
 	while(index != len(cipherRawVector)):
 		difference = cipherMessagevector[index] - cipherRawVector[index]
-		differenceVector.append(chr(difference))
+		status = (difference >= 32 and difference<=126)
+		if(status):
+			differenceVector.append(chr(difference))
 		index += 1
 	return differenceVector
 
@@ -24,16 +28,21 @@ def getNumerical(fileCipher):
 
 def getMessageFromCipher(fileCipher):
 	fileCipher = getNumerical(fileCipher)
-	elemLen, index, maxLen = 7, 0, 89
+	elemLen, index, lengthMessage = 7, 0, 300
 	element = ''
 	cipherVector = []
 	while(fileCipher != ''):
 		element = fileCipher[index:elemLen]
 		cipherVector.append(int(element))
 		fileCipher = fileCipher[elemLen:len(fileCipher)]
-	cipherVector = cipherVector[:len(cipherVector)-maxLen]
-	cipherRawVector = cipherVector[index:maxLen]
-	cipherMessagevector = cipherVector[maxLen:len(cipherVector)]
+	cipherMatrix = mop.squareMatrixMakerOnList(cipherVector)
+	cipherMatrix = mop.matrixTransposer(cipherMatrix)
+	cipherVector = mop.matrixToVector(cipherMatrix)
+
+	cipherVector = cipherVector[:len(cipherVector)-lengthMessage]
+
+	cipherRawVector = cipherVector[index:lengthMessage]
+	cipherMessagevector = cipherVector[lengthMessage:len(cipherVector)]
 	differenceVector = vectorDifference(cipherMessagevector, cipherRawVector)
 	return "".join(differenceVector)
 

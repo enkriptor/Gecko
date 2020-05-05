@@ -1,14 +1,7 @@
 import time
 import random
 import msgGetDemo as mgd
-
-def checkPrime(num):
-	returnState = True
-	for index in range(2, num):
-		if(num%index == 0):
-			returnState = False
-			break
-	return returnState
+import matrixOperation as mop
 
 def checkLength(num):
 	state = False
@@ -36,18 +29,18 @@ def embedCipher(cipherVector, messageVector):
 
 def makeCipherVector(messageVector, timeStampVector):
 	cipherVector, cipherMessageVector = [], []
+	lengthMessage = 300
 	while(True):
 		num = random.randint(10000, 9999999)
-		if(checkPrime(num)):
-			numStr, stateNumStr = checkLength(str(num))
-			if(stateNumStr):
-				cipherVector.append(numStr)
-		if(len(cipherVector) == 89):
+		numStr, stateNumStr = checkLength(str(num))
+		if(stateNumStr):
+			cipherVector.append(numStr)
+		if(len(cipherVector) == lengthMessage):
 			break
 	while(len(messageVector) != 0):
-		if(len(messageVector)>89):
-			messageVectorDelta = messageVector[0:89]
-			messageVector = messageVector[89:len(messageVector)]
+		if(len(messageVector)>lengthMessage):
+			messageVectorDelta = messageVector[0:lengthMessage]
+			messageVector = messageVector[lengthMessage:len(messageVector)]
 		else:
 			messageVectorDelta = messageVector 
 			messageVector = []
@@ -80,6 +73,9 @@ timeStampVector = [element for element in timestamp]
 print('Message laid!')
 cipherVector, cipherMessageVector = makeCipherVector(messageVector, timeStampVector)
 finalCipherVector = cipherVector + cipherMessageVector
+cipherMatrix = mop.squareMatrixMakerOnList(finalCipherVector)
+cipherMatrix = mop.matrixTransposer(cipherMatrix)
+finalCipherVector = mop.matrixToVector(cipherMatrix)
 joinedCipher = joinCipherVector(finalCipherVector)
 finalCipher = getCipherMessage(joinedCipher)
 print('Cipher created!')
