@@ -13,7 +13,7 @@ An encryption daemon used to convert a message into a unique cipher which can be
 * This will cipher your message and create a new file named cipher.txt
 * You can now share this cipher with your friends
 
-## Decrytion of cipher
+## Decryption of cipher
 * To decipher open command prompt once again 
 * Type `python getCipherMessageBeta.py` and hit `Enter`
 * You will get your original message 
