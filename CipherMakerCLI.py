@@ -28,7 +28,6 @@ while(True):
 		for getFileName in getFileNameVector:
 			if(getFileName):
 				decipherCipher(getFileName)
-				break
 			else:
 				print('Cipher a message first!')
 				break
