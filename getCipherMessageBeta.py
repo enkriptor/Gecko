@@ -46,10 +46,8 @@ def getMessageFromCipher(fileCipher):
 	differenceVector = vectorDifference(cipherMessagevector, cipherRawVector)
 	return "".join(differenceVector)
 
-
-file = open('cipher.txt', 'r')
-fileCipher = file.read()
-file.close()
-
-message = getMessageFromCipher(fileCipher)
-print(message)
+def getFile(key):
+	file = open(key, 'r')
+	fileCipher = file.read()
+	file.close()
+	return fileCipher

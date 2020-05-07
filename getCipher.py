@@ -65,20 +65,23 @@ def getCipherMessage(joinedCipher):
 			cipherList.append(joinedCipher[index])
 			joinedCipher = joinedCipher[index + 1 : len(joinedCipher)]
 	return "".join(cipherList)
-		
-message = input('Enter your message: ')
-timestamp = tsg.getTimeStamp()
-messageVector = [element for element in message]
-timeStampVector = [element for element in timestamp]
-print('Message laid!')
-cipherVector, cipherMessageVector = makeCipherVector(messageVector, timeStampVector)
-finalCipherVector = cipherVector + cipherMessageVector
-cipherMatrix = mop.squareMatrixMakerOnList(finalCipherVector)
-cipherMatrix = mop.matrixTransposer(cipherMatrix)
-finalCipherVector = mop.matrixToVector(cipherMatrix)
-joinedCipher = joinCipherVector(finalCipherVector)
-finalCipher = getCipherMessage(joinedCipher)
-print('Cipher created!')
-file = open('cipher.txt', 'w')
-file.write(finalCipher)
-file.close()
+
+def getCipher(message):
+	timestamp = tsg.getTimeStamp()
+	messageVector = [element for element in message]
+	timeStampVector = [element for element in timestamp]
+	print('Message laid!')
+	cipherVector, cipherMessageVector = makeCipherVector(messageVector, timeStampVector)
+	finalCipherVector = cipherVector + cipherMessageVector
+	cipherMatrix = mop.squareMatrixMakerOnList(finalCipherVector)
+	cipherMatrix = mop.matrixTransposer(cipherMatrix)
+	finalCipherVector = mop.matrixToVector(cipherMatrix)
+	joinedCipher = joinCipherVector(finalCipherVector)
+	finalCipher = getCipherMessage(joinedCipher)
+	print('Cipher created!')
+	return finalCipher
+
+def createFile(finalCipher, key):	
+	file = open(key+'.enc', 'w')
+	file.write(finalCipher)
+	file.close()
