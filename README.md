@@ -1,11 +1,16 @@
 # Encrypter
 An encryption daemon used to convert a message into a unique cipher which can be deciphered to the original message.
 
-[![Generic badge](https://img.shields.io/badge/Release-v1.2.0-<COLOR>.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Release-v1.2.1-<COLOR>.svg)](https://shields.io/)
 
 # Prerequisites
 * Download and setup python from (www.python.org)
 * Download or clone the repository to your system
+
+# What's new feature in v1.2.1?
+* Created a common CLI daemon for encryption and decryption
+* Cipher stored in a random generated named file with `.enc` extension
+* Multiple ciphers can be decrypted
 
 # How to run the daemons?
 ## Encryption of text
@@ -26,11 +31,3 @@ An encryption daemon used to convert a message into a unique cipher which can be
 * `B` is for decrypting the existing cipher
 * Enter `B` and hit `Enter`
 * You will get your original message 
-
-
-# What's new feature in v1.2.0?
-* Matrix operation for handling the cipher and decipher workflows
-* Message input length now extended but limited to `300` per use for ciphering and deciphering workflows
-* Code cleaning methodologies in use. `Will produce better code for readability!`
-* Created a common CLI daemon for encryption and decryption
-* Cipher stored in a random generated named file with `.enc` extension
