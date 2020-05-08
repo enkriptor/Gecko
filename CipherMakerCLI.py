@@ -3,17 +3,18 @@ import keyGenerator as kg
 import os
 import glob
 import getMessage as gm
+import fileManager as fm
 
 def cipherMessage():
 	message = input('Enter your message: ')
 	if(len(message)<=300):
 		finalCipher = gc.getCipher(message)
-		gc.createFile(finalCipher, kg.getKey())
+		fm.createFile(finalCipher, kg.getKey())
 	else:
 		print("Enter message of length less than 300")
 
 def decipherCipher(getFileName):
-	fileCipher = gm.getFile(getFileName)
+	fileCipher = fm.getFile(getFileName)
 	message = gm.getMessageFromCipher(fileCipher)
 	print(message)
 

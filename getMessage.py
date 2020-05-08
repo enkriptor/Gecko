@@ -35,19 +35,9 @@ def getMessageFromCipher(fileCipher):
 		element = fileCipher[index:elemLen]
 		cipherVector.append(int(element))
 		fileCipher = fileCipher[elemLen:len(fileCipher)]
-	cipherMatrix = mop.squareMatrixMakerOnList(cipherVector)
-	cipherMatrix = mop.matrixTransposer(cipherMatrix)
-	cipherVector = mop.matrixToVector(cipherMatrix)
-
-	cipherVector = cipherVector[:len(cipherVector)-lengthMessage]
-
+	cipherMatrix = mop.matrixTransposer(mop.squareMatrixMakerOnList(cipherVector))
+	cipherVector = mop.matrixToVector(cipherMatrix)[:len(cipherVector)-lengthMessage]
 	cipherRawVector = cipherVector[index:lengthMessage]
 	cipherMessagevector = cipherVector[lengthMessage:len(cipherVector)]
 	differenceVector = vectorDifference(cipherMessagevector, cipherRawVector)
 	return "".join(differenceVector)
-
-def getFile(key):
-	file = open(key, 'r')
-	fileCipher = file.read()
-	file.close()
-	return fileCipher
