@@ -16,11 +16,11 @@ def checkLength(num):
 def embedCipher(cipherVector, messageVector):
 	cipherMessageVector = []
 	messageLen, index = len(messageVector), 0
-	for primeFactor in cipherVector:
+	for element in cipherVector:
 		if(index >= messageLen):
-			numAssetStr = primeFactor
+			numAssetStr = element
 		else:
-			numAssetStr = str(int(primeFactor) + ord(messageVector[index]))
+			numAssetStr = str(int(element) + ord(messageVector[index]))
 		numAssetStr, status = checkLength(numAssetStr)
 		if(status):
 			cipherMessageVector.append(numAssetStr)
