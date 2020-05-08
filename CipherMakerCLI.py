@@ -1,23 +1,23 @@
 import getCipher as gc
-import getKeyFunction as gkf
+import keyGenerator as kg
 import os
 import glob
-import getCipherMessageBeta as gmb
+import getMessage as gm
 
 def cipherMessage():
 	message = input('Enter your message: ')
 	if(len(message)<=300):
 		finalCipher = gc.getCipher(message)
-		gc.createFile(finalCipher, gkf.getKey())
+		gc.createFile(finalCipher, kg.getKey())
 	else:
 		print("Enter message of length less than 300")
 
 def decipherCipher(getFileName):
-	fileCipher = gmb.getFile(getFileName)
-	message = gmb.getMessageFromCipher(fileCipher)
+	fileCipher = gm.getFile(getFileName)
+	message = gm.getMessageFromCipher(fileCipher)
 	print(message)
 
-print("Enter A to encrypt a message and B to decrypt an existing cipher!")
+print("Enter \'A\' to encrypt a message and \'B\' to decrypt an existing cipher!")
 while(True):
 	userInfo = input('Enter your choice: ')
 	if(userInfo == 'A'):
