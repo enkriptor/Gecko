@@ -7,24 +7,24 @@ import fileManager as fm
 
 def cipherMessage():
 	message = input('Enter your message: ')
+	fm.createFile(message, 'messageCopy', '.txt', 'w')
 	if(len(message)<=300):
-		finalCipher = gc.getCipher(message)
-		fm.createFile(finalCipher, kg.getKey())
+		fm.createFile(gc.getCipher(), kg.getKey(), '.enc', 'w')
 	else:
 		print("Enter message of length less than 300")
 
 def decipherCipher(getFileName):
-	fileCipher = fm.getFile(getFileName)
+	fileCipher = fm.getFile(getFileName, 'r')
 	message = gm.getMessageFromCipher(fileCipher)
 	print(message)
 
-print("Enter \'A\' to encrypt a message and \'B\' to decrypt an existing cipher!")
+print("Enter \'Enc\' to encrypt a message and \'Dec\' to decrypt an existing cipher!")
 while(True):
 	userInfo = input('Enter your choice: ')
-	if(userInfo == 'A'):
+	if(userInfo == 'Enc'):
 		cipherMessage()
 		break
-	elif(userInfo == 'B'):
+	elif(userInfo == 'Dec'):
 		getFileNameVector = glob.glob('*.enc')
 		for getFileName in getFileNameVector:
 			if(getFileName):

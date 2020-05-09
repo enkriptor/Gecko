@@ -2,6 +2,7 @@ import time
 import random
 import timeStampGenerator as tsg
 import matrixOperation as mop
+import fileManager as fm
 
 def checkLength(num):
 	state = False
@@ -13,21 +14,21 @@ def checkLength(num):
 		state = False
 	return (num, state)
 
-def embedCipher(cipherVector, messageVector):
+def embedCipher(cipherVector, messageByteVector):
 	cipherMessageVector = []
-	messageLen, index = len(messageVector), 0
+	messageLen, index = len(messageByteVector), 0
 	for element in cipherVector:
 		if(index >= messageLen):
 			numAssetStr = element
 		else:
-			numAssetStr = str(int(element) + ord(messageVector[index]))
+			numAssetStr = str(int(element) + messageByteVector[index])
 		numAssetStr, status = checkLength(numAssetStr)
 		if(status):
 			cipherMessageVector.append(numAssetStr)
 		index += 1
 	return cipherMessageVector
 
-def makeCipherVector(messageVector, timeStampVector):
+def makeCipherVector(messageByteVector, timeStampVector):
 	cipherVector, cipherMessageVector = [], []
 	lengthMessage = 300
 	while(len(cipherVector) != lengthMessage):
@@ -35,7 +36,7 @@ def makeCipherVector(messageVector, timeStampVector):
 		numStr, stateNumStr = checkLength(str(num))
 		if(stateNumStr):
 			cipherVector.append(numStr)
-	cipherMessageVector += embedCipher(cipherVector, messageVector)
+	cipherMessageVector += embedCipher(cipherVector, messageByteVector)
 	cipherMessageVector += embedCipher(cipherVector, timeStampVector)
 	return cipherVector + cipherMessageVector
 
@@ -53,11 +54,11 @@ def getCipherMessage(joinedCipher):
 			joinedCipher = joinedCipher[index + 1 : len(joinedCipher)]
 	return "".join(cipherList)
 
-def getCipher(message):
-	messageVector = [element for element in message]
-	timeStampVector = [element for element in tsg.getTimeStamp()]
+def getCipher():
+	messageByteVector = fm.getFile('messageCopy.txt', 'rb')
+	timeStampVector = [ord(element) for element in tsg.getTimeStamp()]
 	print('Message laid!')
-	finalCipherVector = makeCipherVector(messageVector, timeStampVector)
+	finalCipherVector = makeCipherVector(messageByteVector, timeStampVector)
 	cipherMatrix = mop.matrixTransposer(mop.squareMatrixMakerOnList(finalCipherVector)) 
 	finalCipher = getCipherMessage("".join(mop.matrixToVector(cipherMatrix)))
 	print('Cipher created!')

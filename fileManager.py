@@ -1,10 +1,14 @@
-def createFile(finalCipher, key):	
-	file = open(key+'.enc', 'w')
+def createFile(finalCipher, key, ext, mode):	
+	file = open(key+ext, mode)
 	file.write(finalCipher)
 	file.close()
 
-def getFile(key):
-	file = open(key, 'r')
-	fileCipher = file.read()
-	file.close()
-	return fileCipher
+def getFile(key, mode):
+	readFile = open(key, mode)
+	if(mode == 'rb'):
+		data = " ".join(map(str, readFile.read())) 
+		fileData = [int(element) for element in data.split()]
+	else:
+		fileData = readFile.read()
+	readFile.close()
+	return fileData
