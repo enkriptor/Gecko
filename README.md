@@ -16,18 +16,19 @@ An encryption daemon used to convert a message into a unique cipher which can be
 ## Encryption of text
 * Open command prompt or shell(Linux/Unix)
 * Type `python CipherMakerCLI.py` and hit `Enter`
-* The daemon will prompt you to enter your choice of `A` and `B` to enter
-* `A` is for encrypting a message
-* Enter `A` and hit `Enter`
+* The daemon will prompt you to enter your choice of `Enc` and `Dec` to enter
+* `Enc` is for encrypting a message
+* Enter `Enc` and hit `Enter`
 * The daemon will prompt you to enter your message
 * Enter your message and hit `Enter`
 * The cipher will be stored in a file with extension `.enc` with a `25` character file name
+* The original message will be stored in `messageCopy.txt`
 * You can now share this cipher with your friends
 
 ## Decryption of cipher
 * Open command prompt or shell(Linux/Unix)
 * Type `python CipherMakerCLI.py` and hit `Enter`
-* The daemon will prompt you to enter your choice of `A` and `B` to enter
-* `B` is for decrypting the existing cipher
-* Enter `B` and hit `Enter`
+* The daemon will prompt you to enter your choice of `Enc` and `Dec` enter
+* `Dec` is for decrypting the existing cipher
+* Enter `Dec` and hit `Enter`
 * You will get your original message 
