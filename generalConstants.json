@@ -1,0 +1,12 @@
+{
+	"checkLength": 7,
+	"lengthMessage": 300,
+	"infinityConstant": 9999999,
+	"startConstant": 10000,
+	"Const0": 32,
+	"Const1": 33,
+	"Const2": 47,
+	"Const3": 58,
+	"Const4": 126,
+	"selectLength": 2
+}

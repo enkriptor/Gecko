@@ -1,25 +1,28 @@
 import matrixOperation as mop
+import fileManager as fm
+import json
 
-def vectorDifference(cipherMessagevector, cipherRawVector):
+def vectorDifference(cipherMessagevector, cipherRawVector, jsonParse):
 	index = 0
 	differenceVector = []
 	while(index != len(cipherRawVector)):
 		difference = cipherMessagevector[index] - cipherRawVector[index]
-		status = (difference >= 32 and difference<=126)
+		status = (difference >=jsonParse['Const0'] and difference<=jsonParse['Const4']) 
 		if(status):
 			differenceVector.append(chr(difference))
 		index += 1
 	return differenceVector
 
-def getNumerical(fileCipher):
+def getNumerical(fileCipher, jsonParse):
 	index = 0
 	fileCipherNumerical = ''
 	while(True):
 		if(index == len(fileCipher)):
 			break
 		numSubstring = ord(fileCipher[index])
-		status = (numSubstring >= 33 and numSubstring<=47) or (numSubstring>=58 and numSubstring<=126)
-		if(status):
+		status1 = (numSubstring >=jsonParse['Const1'] and numSubstring<=jsonParse['Const2']) 
+		status2 = (numSubstring>=jsonParse['Const3'] and numSubstring<=jsonParse['Const4'])
+		if(status1 or status2):
 			fileCipherNumerical += str(numSubstring)
 		else:
 			fileCipherNumerical += fileCipher[index]
@@ -27,8 +30,11 @@ def getNumerical(fileCipher):
 	return fileCipherNumerical
 
 def getMessageFromCipher(fileCipher):
-	fileCipher = getNumerical(fileCipher)
-	elemLen, index, lengthMessage = 7, 0, 300
+	jsonData = fm.getFile('generalConstants.json', 'r')
+	jsonParse = json.loads(jsonData)
+	fileCipher = getNumerical(fileCipher, jsonParse)
+	elemLen = jsonParse['checkLength']
+	index, lengthMessage = 0, jsonParse['lengthMessage']
 	element = ''
 	cipherVector = []
 	while(fileCipher != ''):
@@ -39,5 +45,5 @@ def getMessageFromCipher(fileCipher):
 	cipherVector = mop.matrixToVector(cipherMatrix)[:len(cipherVector)-lengthMessage]
 	cipherRawVector = cipherVector[index:lengthMessage]
 	cipherMessagevector = cipherVector[lengthMessage:len(cipherVector)]
-	differenceVector = vectorDifference(cipherMessagevector, cipherRawVector)
+	differenceVector = vectorDifference(cipherMessagevector, cipherRawVector, jsonParse)
 	return "".join(differenceVector)
