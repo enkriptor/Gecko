@@ -1,22 +1,22 @@
 # Encrypter
-An encryption daemon used to convert a message into a unique cipher which can be deciphered to the original message.
+An encryption daemon used to convert a message into a unique cipher using a generated unique key and which can be deciphered to the original message using the key existing on the system.
 
-[![Generic badge](https://img.shields.io/badge/Release-v1.2.2-<COLOR>.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Release-v1.3.2-<COLOR>.svg)](https://shields.io/)
 
 # Prerequisites
 * Download and setup python from (www.python.org)
 * Download or clone the repository to your system
 
-# What's new feature in v1.2.2?
-* Created a common CLI daemon for encryption and decryption
-* Cipher stored in a random generated named file with `.enc` extension
-* Multiple ciphers can be decrypted
-* Message copy available as messageCopy.txt
+# What's new feature in v1.3.2?
+* Unique key feature added
+* Receiver's key can be added for the receiver to decipher the cipher.
 
 # How to run the daemons?
 ## Encryption of text
 * Open command prompt or shell(Linux/Unix)
 * Type `python CipherMakerCLI.py` and hit `Enter`
+* The daemon will generate a unique key if not already present on the system otherwise will read the existing key.
+* The daemon will prompt for the receiver's unique key, if left blank and `Enter` receiver's key will be the existing unique key from the system.
 * The daemon will prompt you to enter your choice of `Enc` and `Dec` to enter
 * `Enc` is for encrypting a message
 * Enter `Enc` and hit `Enter`
@@ -29,6 +29,8 @@ An encryption daemon used to convert a message into a unique cipher which can be
 ## Decryption of cipher
 * Open command prompt or shell(Linux/Unix)
 * Type `python CipherMakerCLI.py` and hit `Enter`
+* The daemon will generate a unique key if not already present on the system otherwise will read the existing key.
+* The daemon will prompt for the receiver's unique key, if left blank and `Enter` receiver's key will be the existing unique key from the system.
 * The daemon will prompt you to enter your choice of `Enc` and `Dec` enter
 * `Dec` is for decrypting the existing cipher
 * Enter `Dec` and hit `Enter`
