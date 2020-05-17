@@ -43,7 +43,7 @@ def getMessageFromCipher(fileCipher, securityKey, recieversKey):
 		cipherVector.append(int(element))
 		fileCipher = fileCipher[elemLen:len(fileCipher)]
 	cipherMatrix = mop.matrixTransposer(mop.squareMatrixMakerOnList(cipherVector))
-	cipherVector = mop.matrixToVector(cipherMatrix)[:len(cipherVector)]
+	cipherVector = mop.matrixToVector(cipherMatrix)
 	cipherRawVector = cipherVector[index:lengthMessage]
 	cipherMessageVector = cipherVector[lengthMessage:len(cipherVector)-lengthMessage]
 	cipherSignatureVector = cipherVector[len(cipherVector)-lengthMessage:len(cipherVector)]
