@@ -3,7 +3,10 @@ import timeStampGenerator as tsg
 import matrixOperation as mop
 import fileManager as fm
 
-def checkLength(num, jsonParse):
+jsonData = fm.getFile('generalConstants.json', 'r')
+jsonParse = json.loads(jsonData)
+
+def checkLength(num):
 	state = False
 	if(len(num)<=jsonParse['checkLength']):
 		while(len(num)<jsonParse['checkLength']):
@@ -13,7 +16,7 @@ def checkLength(num, jsonParse):
 		state = False
 	return (num, state)
 
-def embedCipher(cipherVector, messageByteVector, jsonParse):
+def embedCipher(cipherVector, messageByteVector):
 	cipherMessageVector = []
 	messageLen, index = len(messageByteVector), 0
 	for element in cipherVector:
@@ -21,24 +24,24 @@ def embedCipher(cipherVector, messageByteVector, jsonParse):
 			numAssetStr = element
 		else:
 			numAssetStr = str(int(element) + messageByteVector[index])
-		numAssetStr, status = checkLength(numAssetStr, jsonParse)
+		numAssetStr, status = checkLength(numAssetStr)
 		if(status):
 			cipherMessageVector.append(numAssetStr)
 		index += 1
 	return cipherMessageVector
 
-def makeCipherVector(messageByteVector, timeStampVector, jsonParse):
+def makeCipherVector(messageByteVector, timeStampVector):
 	cipherVector, cipherMessageVector = [], []
 	while(len(cipherVector) != jsonParse['lengthMessage']):
 		num = random.randint(jsonParse['startConstant'], jsonParse['infinityConstant'])
-		numStr, stateNumStr = checkLength(str(num), jsonParse)
+		numStr, stateNumStr = checkLength(str(num))
 		if(stateNumStr):
 			cipherVector.append(numStr)
-	cipherMessageVector += embedCipher(cipherVector, messageByteVector, jsonParse)
-	cipherMessageVector += embedCipher(cipherVector, timeStampVector, jsonParse)
+	cipherMessageVector += embedCipher(cipherVector, messageByteVector)
+	cipherMessageVector += embedCipher(cipherVector, timeStampVector)
 	return cipherVector + cipherMessageVector
 
-def getCipherMessage(joinedCipher, jsonParse):
+def getCipherMessage(joinedCipher):
 	index, length = 0, jsonParse['selectLength']
 	cipherList = []
 	while(len(joinedCipher) != 0):
@@ -55,12 +58,10 @@ def getCipherMessage(joinedCipher, jsonParse):
 
 def getCipher():
 	messageByteVector = fm.getFile('messageCopy.txt', 'rb')
-	jsonData = fm.getFile('generalConstants.json', 'r')
-	jsonParse = json.loads(jsonData)
 	timeStampVector = [ord(element) for element in tsg.getTimeStamp()]
 	print('Message laid!')
-	finalCipherVector = makeCipherVector(messageByteVector, timeStampVector, jsonParse)
+	finalCipherVector = makeCipherVector(messageByteVector, timeStampVector)
 	cipherMatrix = mop.matrixTransposer(mop.squareMatrixMakerOnList(finalCipherVector)) 
-	finalCipher = getCipherMessage("".join(mop.matrixToVector(cipherMatrix)), jsonParse)
+	finalCipher = getCipherMessage("".join(mop.matrixToVector(cipherMatrix)))
 	print('Cipher created!')
 	return finalCipher

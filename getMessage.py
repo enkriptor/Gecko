@@ -2,7 +2,10 @@ import matrixOperation as mop
 import fileManager as fm
 import json
 
-def vectorDifference(cipherMessagevector, cipherRawVector, jsonParse):
+jsonData = fm.getFile('generalConstants.json', 'r')
+jsonParse = json.loads(jsonData)
+
+def vectorDifference(cipherMessagevector, cipherRawVector):
 	index = 0
 	differenceVector = []
 	while(index != len(cipherRawVector)):
@@ -13,7 +16,7 @@ def vectorDifference(cipherMessagevector, cipherRawVector, jsonParse):
 		index += 1
 	return differenceVector
 
-def getNumerical(fileCipher, jsonParse):
+def getNumerical(fileCipher):
 	index = 0
 	fileCipherNumerical = ''
 	while(True):
@@ -30,9 +33,7 @@ def getNumerical(fileCipher, jsonParse):
 	return fileCipherNumerical
 
 def getMessageFromCipher(fileCipher):
-	jsonData = fm.getFile('generalConstants.json', 'r')
-	jsonParse = json.loads(jsonData)
-	fileCipher = getNumerical(fileCipher, jsonParse)
+	fileCipher = getNumerical(fileCipher)
 	elemLen = jsonParse['checkLength']
 	index, lengthMessage = 0, jsonParse['lengthMessage']
 	element = ''
@@ -45,5 +46,5 @@ def getMessageFromCipher(fileCipher):
 	cipherVector = mop.matrixToVector(cipherMatrix)[:len(cipherVector)-lengthMessage]
 	cipherRawVector = cipherVector[index:lengthMessage]
 	cipherMessagevector = cipherVector[lengthMessage:len(cipherVector)]
-	differenceVector = vectorDifference(cipherMessagevector, cipherRawVector, jsonParse)
+	differenceVector = vectorDifference(cipherMessagevector, cipherRawVector)
 	return "".join(differenceVector)
