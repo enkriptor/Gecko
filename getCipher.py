@@ -56,9 +56,10 @@ def getCipherMessage(joinedCipher):
 			joinedCipher = joinedCipher[index + 1 : len(joinedCipher)]
 	return "".join(cipherList)
 
-def getCipher():
+def getCipher(securityKey, recieversKey):
 	messageByteVector = fm.getFile('messageCopy.txt', 'rb')
-	timeStampVector = [ord(element) for element in tsg.getTimeStamp()]
+	uniqueSignature = tsg.getTimeStamp() + 'S#' + securityKey + 'R#' + recieversKey
+	timeStampVector = [ord(element) for element in uniqueSignature]
 	print('Message laid!')
 	finalCipherVector = makeCipherVector(messageByteVector, timeStampVector)
 	cipherMatrix = mop.matrixTransposer(mop.squareMatrixMakerOnList(finalCipherVector)) 

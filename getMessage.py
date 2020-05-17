@@ -32,7 +32,7 @@ def getNumerical(fileCipher):
 		index += 1
 	return fileCipherNumerical
 
-def getMessageFromCipher(fileCipher):
+def getMessageFromCipher(fileCipher, securityKey, recieversKey):
 	fileCipher = getNumerical(fileCipher)
 	elemLen = jsonParse['checkLength']
 	index, lengthMessage = 0, jsonParse['lengthMessage']
@@ -43,8 +43,13 @@ def getMessageFromCipher(fileCipher):
 		cipherVector.append(int(element))
 		fileCipher = fileCipher[elemLen:len(fileCipher)]
 	cipherMatrix = mop.matrixTransposer(mop.squareMatrixMakerOnList(cipherVector))
-	cipherVector = mop.matrixToVector(cipherMatrix)[:len(cipherVector)-lengthMessage]
+	cipherVector = mop.matrixToVector(cipherMatrix)[:len(cipherVector)]
 	cipherRawVector = cipherVector[index:lengthMessage]
-	cipherMessagevector = cipherVector[lengthMessage:len(cipherVector)]
-	differenceVector = vectorDifference(cipherMessagevector, cipherRawVector)
-	return "".join(differenceVector)
+	cipherMessageVector = cipherVector[lengthMessage:len(cipherVector)-lengthMessage]
+	cipherSignatureVector = cipherVector[len(cipherVector)-lengthMessage:len(cipherVector)]
+	differenceMessageVector = vectorDifference(cipherMessageVector, cipherRawVector)
+	differenceSignatureVector = vectorDifference(cipherSignatureVector, cipherRawVector)
+	if(recieversKey in "".join(differenceSignatureVector)):
+		return "".join(differenceMessageVector)
+	else:
+		print("Provide correct key for the cipher!")
