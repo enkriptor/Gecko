@@ -5,20 +5,20 @@ import glob, json
 import getMessage as gm
 import fileManager as fm
 
-jsonData = fm.getFile('generalConstants.json', 'r')
-jsonParse = json.loads(jsonData)
-
 def cipherMessage(securityKey, recieversKey):
 	message = input('Enter your message: ')
 	fm.createFile(message, 'messageCopy', '.txt', 'w')
-	if(len(message)<=jsonParse['lengthMessage']):
-		fm.createFile(gc.getCipher(securityKey, recieversKey), kg.getKey(25), '.enc', 'w')
+	encrKey = gc.getCipher()
+	os.system('del public.key')
+	if(securityKey == recieversKey):
+		securityKeyWithEncr = securityKey + encrKey
 	else:
-		print("Enter message of length less than 300")
+		securityKeyWithEncr = recieversKey + encrKey
+	open('public.key','w').write(securityKeyWithEncr)
 
-def decipherCipher(getFileName, securityKey, recieversKey):
-	fileCipher = fm.getFile(getFileName, 'r')
-	message = gm.getMessageFromCipher(fileCipher, securityKey, recieversKey)
+def decipherCipher(yPhase):
+	fileCipher = open("finalMessage.txt", 'rb').read().decode('utf-8')
+	message = gm.getMessageFromCipher(fileCipher, yPhase)
 	print(message)
 
 def mainCLIAction(securityKey, recieversKey):
@@ -28,32 +28,27 @@ def mainCLIAction(securityKey, recieversKey):
 			cipherMessage(securityKey, recieversKey)
 			break
 		elif(userInfo == 'Dec'):
-			getFileNameVector = glob.glob('*.enc')
-			for getFileName in getFileNameVector:
-				if(getFileName):
-					decipherCipher(getFileName, securityKey, recieversKey)
-				else:
-					print('Cipher a message first!')
-					break
+			securityKeyWithEncr = open('public.key','r').read()
+			privateKey = open('private.key', 'r').read()
+			if(securityKeyWithEncr[:47] == privateKey):
+				decipherCipher(securityKeyWithEncr[47:len(securityKeyWithEncr)])
+			else:
+				print("You have wrong public key!")
 			break
 		else: 
 			print('Enter correct option')
 
 def checkForKey():
 	getKeyVector = glob.glob('*.key')
-	if(len(getKeyVector)>1):
-		print("Multiple keys exist! Aborting the process!")
-		os.system('exit')
+	if(len(getKeyVector) > 1):
+		print('Reading existing unique key!')
+		with open("private.key",'r') as keyFile:
+			securityKey = keyFile.read()
 	else:
-		if(len(getKeyVector) == 1):
-			print('Reading existing unique key!')
-			with open(getKeyVector[0],'r') as keyFile:
-				securityKey = keyFile.read()
-		else:
-			print('Generating new key!')
-			securityKey = kg.getKey(47)
-			with open(kg.getKey(25)+'.key', 'w') as keyFile:
-				keyFile.write(securityKey)
+		print('Generating new key!')
+		securityKey = kg.getKey(47)
+		with open('private.key', 'w') as keyFile:
+			keyFile.write(securityKey)
 	return securityKey
 
 securityKey = checkForKey()
