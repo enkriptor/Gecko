@@ -3,12 +3,12 @@ import os, glob
 import getMessage as gm
 import workflowUtils as wu
 
-def cipherMessage(securityKey, recieversKey):
+def cipherMessage(securityKey, receiversKey):
 	message = input('Enter your message: ')
 	open('messageCopy.txt', 'w').write(message)
 	encrKey = gc.getCipher()
 	os.system('del public.key')
-	securityKeyWithEncr = wu.getPrintables(wu.embedKeyIntoMessage(int(encrKey), wu.getBitMessageDirect(recieversKey)))
+	securityKeyWithEncr = wu.getPrintables(wu.embedKeyIntoMessage(int(encrKey), wu.getBitMessageDirect(receiversKey)))
 	open('public.key','wb').write(securityKeyWithEncr.encode('utf-8'))
 
 def decipherCipher(yPhase):
@@ -16,11 +16,11 @@ def decipherCipher(yPhase):
 	message = gm.getMessageFromCipher(fileCipher, yPhase)
 	print(message)
 
-def mainCLIAction(securityKey, recieversKey):
+def mainCLIAction(securityKey, receiversKey):
 	while(True):
 		userInfo = input('Enter your choice: ')
 		if(userInfo == 'Enc'):
-			cipherMessage(securityKey, recieversKey)
+			cipherMessage(securityKey, receiversKey)
 			break
 		elif(userInfo == 'Dec'):
 			securityKeyWithEncr = open('public.key','rb').read().decode('utf-8')
@@ -56,13 +56,13 @@ while(True):
 		print("Private key generated")
 	choice = input("Do you want to continue? Enter y to continue or n to exit: ")
 	if(choice == "y"):
-		print("Enter the key of the recipient or leave it blank to for being the recipient yourself!")
-		recieversKey = input("Enter receiver's unique key: ")
-		if(recieversKey == ""):
+		print("Enter the key of the recipient or leave it blank if you're the recipient!")
+		receiversKey = input("Enter receiver's unique key: ")
+		if(receiversKey == ""):
 			print("Assigning key to self!")
-			recieversKey = securityKey
+			receiversKey = securityKey
 		print("Enter \'Enc\' to encrypt a message and \'Dec\' to decrypt an existing cipher!")
-		mainCLIAction(securityKey, recieversKey)
+		mainCLIAction(securityKey, receiversKey)
 		os.system('pause')
 		break
 	elif(choice == "n"):
