@@ -4,11 +4,12 @@ An encryption application to encrypt a message and decrypt it using generated ad
 * Report bugs and other suggestions at richkidmercier@protonmail.com
 * To contribute please refer to the `CONTRIBUTING.md` in the `master` branch
 
-[![Generic badge](https://img.shields.io/badge/Release-v1.5.2-<COLOR>.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Release-v1.5.4-<COLOR>.svg)](https://shields.io/)
 
-## What's new feature in v1.5.3?
+## What's new feature in v1.5.4?
 * Created seperate key generation
 * Created the `.exe` application of the source
+* Improvement in user info messages on CLI
 
 # For Windows Users:
 * Goto the `dist` folder and run the `CipherMakerCLI.exe`
