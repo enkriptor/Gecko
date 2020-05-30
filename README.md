@@ -1,5 +1,8 @@
 # Encrypter
-An encryption daemon to encrypt a message using keys generated.
+An encryption application to encrypt a message and decrypt it using generated address key for the user.
+
+* Report bugs and other suggestions at richkidmercier@protonmail.com
+* To contribute please refer to the `CONTRIBUTING.md` in the `master` branch
 
 [![Generic badge](https://img.shields.io/badge/Release-v1.5.2-<COLOR>.svg)](https://shields.io/)
 
