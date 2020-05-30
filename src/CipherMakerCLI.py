@@ -36,7 +36,7 @@ def mainCLIAction(securityKey, recieversKey):
 			print('Enter correct option')
 
 def checkForKey():
-	newKey = False
+	newkeyStatus = False
 	getKeyVector = glob.glob('*.key')
 	if("private.key" in getKeyVector):
 		print('Reading existing unique key!')
@@ -47,12 +47,12 @@ def checkForKey():
 		securityKey = wu.getAddressKey(47)
 		with open('private.key', 'w') as keyFile:
 			keyFile.write(securityKey)
-			newKey = True
-	return securityKey, newKey
+			newkeyStatus = True
+	return securityKey, newkeyStatus
 
-securityKey, keyStatus = checkForKey()
+securityKey, newkeyStatus = checkForKey()
 while(True):
-	if(keyStatus):
+	if(newkeyStatus):
 		print("Private key generated")
 	choice = input("Do you want to continue? Enter y to continue or n to exit: ")
 	if(choice == "y"):
@@ -66,9 +66,8 @@ while(True):
 		os.system('pause')
 		break
 	elif(choice == "n"):
-		if(keyStatus):
-			print("Private key generated")
-		os.system('exit')
+		print("Aborting the application!")
+		os.system('pause')
 		break
 	else: 
 		print("Please enter right choice!")
