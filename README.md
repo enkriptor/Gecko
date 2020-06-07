@@ -1,8 +1,7 @@
 # Encrypter
 An encryption application to encrypt a message and decrypt it using generated address key for the user.
 
-* Report bugs and other suggestions at richkidmercier@protonmail.com
-* To contribute please refer to the `CONTRIBUTING.md` in the `master` branch
+* To report any bug you(`the user`) do raise an issue, as it will be helpful!
 
 [![Generic badge](https://img.shields.io/badge/Release-v1.5.4-<COLOR>.svg)](https://shields.io/)
 
