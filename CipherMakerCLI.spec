@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['CipherMakerCLI.py'],
-             pathex=['C:\\Users\\PRC\\Desktop\\weryt\\cryptoFol\\cryptoTestField\\Deployment\\Encrypter\\src'],
+             pathex=['C:\\Users\\PRC\\Desktop\\weryt\\cryptoFol\\cryptoTestField\\Deployment\\Gecko\\src'],
              binaries=[],
              datas=[],
              hiddenimports=[],

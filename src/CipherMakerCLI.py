@@ -27,9 +27,9 @@ def mainCLIAction(securityKey, receiversKey):
 			publickeyElems = "".join([str(ord(element)) for element in securityKeyWithEncr])
 			privateKey = open('private.key', 'r').read()
 			privatekeyElems = "".join([str(ord(element)) for element in privateKey])
-			encrKey = int(publickeyElems[:17]) - int(privatekeyElems[:17])
+			encrKey = int(publickeyElems[:617]) - int(privatekeyElems[:617])
 			if(encrKey<0):
-				encrKey = int(publickeyElems[:18]) - int(privatekeyElems[:17])
+				encrKey = int(publickeyElems[:618]) - int(privatekeyElems[:617])
 			decipherCipher(encrKey)
 			break
 		else: 
