@@ -1,30 +1,30 @@
 import random
 from random import randrange, getrandbits
 
-def isPrime(n, k):
-	if(n == 2 or n == 3):
+def isPrime(number, numberOfTests):
+	if(number == 2 or number == 3):
 		return True 
-	if(n <= 1 or n%2 == 0):
+	if(number <= 1 or number%2 == 0):
 		return False
 
-	s = 0
-	r = n-1
+	sumTotal = 0
+	recursions = number-1
 
-	while(r & 1 == 0):
-		s += 1
-		r //= 2
+	while(recursions & 1 == 0):
+		sumTotal += 1
+		recursions //= 2
 
-	for _ in range(k):
-		a = randrange(2, n-1)
-		x = pow(a, r, n)
-		if(x != 1 and x != n-1):
-			j = 1
-			while(j < s and x != n-1):
-				x = pow(x, 2, n)
-				if(x == 1):
+	for _ in range(numberOfTests):
+		randomNumber = randrange(2, number-1)
+		modulo = pow(randomNumber, recursions, number)
+		if(modulo != 1 and modulo != number-1):
+			jIndex = 1
+			while(jIndex < sumTotal and modulo != number-1):
+				modulo = pow(modulo, 2, number)
+				if(modulo == 1):
 					return False
-				j += 1
-			if(x != n-1):
+				jIndex += 1
+			if(modulo != number-1):
 				return False
 	return True
 
