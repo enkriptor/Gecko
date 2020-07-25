@@ -64,7 +64,11 @@ def getPrintables(message):
 	return originalMessage
 
 def getKey(messageBitNumeric):
-	yPhase = generatePrimeNumber() * generatePrimeNumber()
+	pPhase, qPhase = generatePrimeNumber(), generatePrimeNumber()
+	while(True):
+		if(pPhase != qPhase):
+			yPhase = pPhase * qPhase
+			break
 	return yPhase
 
 def embedKeyIntoMessage(yPhase, messageBitNumeric):
