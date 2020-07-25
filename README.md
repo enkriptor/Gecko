@@ -1,4 +1,4 @@
-# Encrypter
+# Gecko
 An encryption application to encrypt a message and decrypt it using generated address key for the user.
 
 * To report any bug you(`the user`) do raise an issue, as it will be helpful!
