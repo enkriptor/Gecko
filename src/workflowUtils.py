@@ -66,6 +66,7 @@ def getPrintables(message):
 def getKey(messageBitNumeric):
 	pPhase, qPhase = generatePrimeNumber(), generatePrimeNumber()
 	while(True):
+		pPhase, qPhase = generatePrimeNumber(), generatePrimeNumber()
 		if(pPhase != qPhase):
 			yPhase = pPhase * qPhase
 			break
